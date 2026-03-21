@@ -81,6 +81,21 @@ __pycache__/
 `,
   );
 
+  // .claude/settings.json — pre-approve telegram plugin
+  fs.mkdirSync(path.join(dir, '.claude'), { recursive: true });
+  fs.writeFileSync(
+    path.join(dir, '.claude', 'settings.json'),
+    JSON.stringify(
+      {
+        permissions: {
+          allow: ['mcp__plugin_telegram_telegram__reply'],
+        },
+      },
+      null,
+      2,
+    ) + '\n',
+  );
+
   // git init
   if (!fs.existsSync(path.join(dir, '.git'))) {
     try {

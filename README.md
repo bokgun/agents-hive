@@ -230,17 +230,19 @@ export HIVE_WORKSPACE=~/my-workspace
 
 ## Claude Code Integration
 
-다른 Claude Code 세션에서 agents-hive를 설치하려면 [`CLAUDE-INSTALL.md`](CLAUDE-INSTALL.md)를 읽게 하세요:
+To install agents-hive from another Claude Code session, have it read [`CLAUDE-INSTALL.md`](CLAUDE-INSTALL.md):
 
 ```
-이 파일을 읽고 따라해: https://raw.githubusercontent.com/bokgun/agents-hive/main/CLAUDE-INSTALL.md
+Read and follow this: https://raw.githubusercontent.com/bokgun/agents-hive/main/CLAUDE-INSTALL.md
 ```
 
-또는 한 줄로 설치:
+Or install in one line:
 
 ```bash
 git clone https://github.com/bokgun/agents-hive.git ~/.agents-hive && cd ~/.agents-hive && bun install && bun run build && bun link
 ```
+
+> [한국어 설치 가이드](CLAUDE-INSTALL.ko.md)
 
 ## Contributing
 

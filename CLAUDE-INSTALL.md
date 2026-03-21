@@ -1,16 +1,16 @@
 # agents-hive — Claude Code Install Guide
 
-이 파일은 Claude Code가 읽고 agents-hive를 자동으로 설치·설정할 수 있도록 작성되었습니다.
+This file is designed for Claude Code to read and automatically install & configure agents-hive.
 
 ## 1. Prerequisites Check
 
-아래 명령어로 필수 도구가 설치되어 있는지 확인하세요:
+Verify required tools are installed:
 
 ```bash
 command -v git && command -v bun
 ```
 
-bun이 없으면 먼저 설치:
+If bun is missing, install it first:
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
@@ -29,7 +29,7 @@ cd ~/.agents-hive && bun install && bun run build && bun link
 hive init ~/agents-workspace
 ```
 
-셸 설정에 환경변수를 추가하세요:
+Add the environment variable to your shell config:
 
 ```bash
 echo 'export HIVE_WORKSPACE=~/agents-workspace' >> ~/.zshrc
@@ -38,13 +38,13 @@ export HIVE_WORKSPACE=~/agents-workspace
 
 ## 4. Create Your First Project
 
-현재 작업 디렉토리를 프로젝트로 등록:
+Register a project with an assigned agent:
 
 ```bash
-hive project create my-project claude "프로젝트 설명"
+hive project create my-project claude "Project description"
 ```
 
-에이전트 옵션: `claude` (코딩), `gemini` (리서치), `codex` (비동기 작업)
+Agent options: `claude` (coding), `gemini` (research), `codex` (async tasks)
 
 ## 5. Verify
 
@@ -55,27 +55,27 @@ hive --version
 
 ## Quick Reference
 
-| 명령어 | 설명 |
-|--------|------|
-| `hive project create <name> <agent> <desc>` | 프로젝트 생성 |
-| `hive project list` | 프로젝트 목록 |
-| `hive memo <project> <content>` | 프로젝트 메모 저장 |
-| `hive memo global <content>` | 전역 메모 저장 |
-| `hive status` | 전체 상태 확인 |
-| `hive run <project> <command>` | 에이전트로 명령 실행 |
-| `hive session <project>` | 인터랙티브 세션 |
-| `hive briefing` | 일일 브리핑 생성 |
-| `hive cron add <name> <schedule> <cmd>` | 크론 작업 추가 |
+| Command | Description |
+|---------|-------------|
+| `hive project create <name> <agent> <desc>` | Create a project |
+| `hive project list` | List all projects |
+| `hive memo <project> <content>` | Save project memo |
+| `hive memo global <content>` | Save global memo |
+| `hive status` | Show all project status |
+| `hive run <project> <command>` | Run command via agent |
+| `hive session <project>` | Start interactive session |
+| `hive briefing` | Generate daily briefing |
+| `hive cron add <name> <schedule> <cmd>` | Add a cron job |
 
 ## For Claude Code
 
-이 프로젝트를 설치한 후, 워크스페이스의 `CLAUDE.md`에 아래 내용을 추가하면 agents-hive와 연동됩니다:
+After installing, add the following to your workspace's `CLAUDE.md` to integrate with agents-hive:
 
 ```markdown
 ## agents-hive Integration
-- 작업 완료 시 `.claude/memory.md`에 요약을 기록하세요
-- 상태 변경 시 `shared-memory/status.json`을 업데이트하세요
-- 다른 프로젝트 참조 시 `shared-memory/`를 확인하세요
+- On task completion, write a summary to `.claude/memory.md`
+- On status change, update `shared-memory/status.json`
+- When referencing other projects, check `shared-memory/`
 ```
 
-소스: https://github.com/bokgun/agents-hive
+Source: https://github.com/bokgun/agents-hive

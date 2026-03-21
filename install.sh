@@ -6,7 +6,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/user/agents-hive/main/install.sh | bash
 #
 # Or clone and run:
-#   git clone https://github.com/user/agents-hive.git
+#   git clone https://github.com/bokgun/agents-hive.git
 #   cd agents-hive && ./install.sh
 # ============================================================================
 
@@ -15,7 +15,7 @@ set -euo pipefail
 GREEN='\033[0;32m'; CYAN='\033[0;36m'; YELLOW='\033[1;33m'
 RED='\033[0;31m'; NC='\033[0m'; DIM='\033[2m'
 
-REPO_URL="https://github.com/user/agents-hive"
+REPO_URL="https://github.com/bokgun/agents-hive"
 
 echo -e "${CYAN}"
 cat << 'LOGO'

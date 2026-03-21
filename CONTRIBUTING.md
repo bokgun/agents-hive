@@ -5,7 +5,7 @@ Thanks for your interest in contributing! Here's how to get started.
 ## Development Setup
 
 ```bash
-git clone https://github.com/user/agents-hive.git
+git clone https://github.com/bokgun/agents-hive.git
 cd agents-hive
 
 # Install dependencies

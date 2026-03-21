@@ -41,7 +41,7 @@ But running them across multiple projects gets messy fast — scattered context,
 
 ```bash
 # Option 1: Clone and install
-git clone https://github.com/user/agents-hive.git
+git clone https://github.com/bokgun/agents-hive.git
 cd agents-hive && bun install && bun run build && bun link
 
 # Option 2: Quick install (requires bun + git)

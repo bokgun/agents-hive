@@ -43,6 +43,24 @@ describe('CLI interface', () => {
     expect(stdout).toContain('apply');
   });
 
+  test('start --help shows description', () => {
+    const { stdout, exitCode } = runHive(['start', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('background');
+  });
+
+  test('stop --help shows description', () => {
+    const { stdout, exitCode } = runHive(['stop', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('Stop');
+  });
+
+  test('ps --help shows description', () => {
+    const { stdout, exitCode } = runHive(['ps', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('running');
+  });
+
   test('update --help shows description', () => {
     const { stdout, exitCode } = runHive(['update', '--help']);
     expect(exitCode).toBe(0);

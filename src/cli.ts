@@ -13,6 +13,7 @@ import { cleanup } from './commands/cleanup.js';
 import { notify } from './commands/notify.js';
 import { uninstall } from './commands/uninstall.js';
 import { update } from './commands/update.js';
+import { start, stop, ps } from './commands/daemon.js';
 import { N, Y } from './lib/colors.js';
 import { loadEnv } from './lib/env.js';
 
@@ -178,6 +179,30 @@ program
   .description('Send Telegram notification')
   .action((msgParts: string[]) => {
     notify(msgParts.join(' '));
+  });
+
+// --- start ---
+program
+  .command('start <project> [extra...]')
+  .description('Start a project session in the background (tmux)')
+  .action((project: string, extra: string[]) => {
+    start(project, extra);
+  });
+
+// --- stop ---
+program
+  .command('stop <project>')
+  .description('Stop a running project session')
+  .action((project: string) => {
+    stop(project);
+  });
+
+// --- ps ---
+program
+  .command('ps')
+  .description('List running project sessions')
+  .action(() => {
+    ps();
   });
 
 // --- update ---

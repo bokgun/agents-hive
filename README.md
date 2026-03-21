@@ -50,6 +50,12 @@ cd agents-hive && bun install && bun run build && bun link
 curl -fsSL https://raw.githubusercontent.com/user/agents-hive/main/install.sh | bash
 ```
 
+### Uninstall
+
+```bash
+hive uninstall
+```
+
 ### Prerequisites
 
 - **Node.js** 18+, [**bun**](https://bun.sh), **git**

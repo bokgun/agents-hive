@@ -50,6 +50,12 @@ cd agents-hive && bun install && bun run build && bun link
 curl -fsSL https://raw.githubusercontent.com/bokgun/agents-hive/main/install.sh | bash
 ```
 
+### 설치 해제
+
+```bash
+hive uninstall
+```
+
 ### 사전 요구사항
 
 - **Node.js** 18+, [**bun**](https://bun.sh), **git**

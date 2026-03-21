@@ -11,6 +11,7 @@ import { status } from './commands/status.js';
 import { briefing } from './commands/briefing.js';
 import { cleanup } from './commands/cleanup.js';
 import { notify } from './commands/notify.js';
+import { uninstall } from './commands/uninstall.js';
 import { N, Y } from './lib/colors.js';
 
 const VERSION = '0.1.0';
@@ -173,6 +174,14 @@ program
   .description('Send Telegram notification')
   .action((msgParts: string[]) => {
     notify(msgParts.join(' '));
+  });
+
+// --- uninstall ---
+program
+  .command('uninstall')
+  .description('Uninstall agents-hive CLI')
+  .action(() => {
+    uninstall();
   });
 
 // Custom help

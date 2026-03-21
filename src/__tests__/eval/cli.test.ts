@@ -42,4 +42,15 @@ describe('CLI interface', () => {
     expect(stdout).toContain('remove');
     expect(stdout).toContain('apply');
   });
+
+  test('uninstall --help shows description', () => {
+    const { stdout, exitCode } = runHive(['uninstall', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('Uninstall');
+  });
+
+  test('--help includes uninstall command', () => {
+    const { stdout } = runHive(['--help']);
+    expect(stdout).toContain('uninstall');
+  });
 });

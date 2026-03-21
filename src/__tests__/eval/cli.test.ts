@@ -55,6 +55,18 @@ describe('CLI interface', () => {
     expect(stdout).toContain('Stop');
   });
 
+  test('setup --help shows subcommands', () => {
+    const { stdout, exitCode } = runHive(['setup', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('telegram');
+  });
+
+  test('setup telegram --help shows description', () => {
+    const { stdout, exitCode } = runHive(['setup', 'telegram', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('Telegram');
+  });
+
   test('ps --help shows description', () => {
     const { stdout, exitCode } = runHive(['ps', '--help']);
     expect(exitCode).toBe(0);

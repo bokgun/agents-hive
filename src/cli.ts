@@ -14,6 +14,7 @@ import { notify } from './commands/notify.js';
 import { uninstall } from './commands/uninstall.js';
 import { update } from './commands/update.js';
 import { start, stop, ps } from './commands/daemon.js';
+import { setupTelegram } from './commands/setup.js';
 import { N, Y } from './lib/colors.js';
 import { loadEnv } from './lib/env.js';
 
@@ -203,6 +204,16 @@ program
   .description('List running project sessions')
   .action(() => {
     ps();
+  });
+
+// --- setup ---
+const setupCmd = program.command('setup').description('Interactive setup wizards');
+
+setupCmd
+  .command('telegram')
+  .description('Configure Telegram notifications')
+  .action(async () => {
+    await setupTelegram();
   });
 
 // --- update ---

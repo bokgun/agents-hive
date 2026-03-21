@@ -3,7 +3,7 @@
 # agents-hive installer
 #
 # Usage:
-#   curl -fsSL https://raw.githubusercontent.com/user/agents-hive/main/install.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/bokgun/agents-hive/main/install.sh | bash
 #
 # Or clone and run:
 #   git clone https://github.com/bokgun/agents-hive.git

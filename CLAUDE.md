@@ -34,10 +34,15 @@ src/
 │   ├── status.ts      # hive status
 │   ├── briefing.ts    # hive briefing
 │   ├── cleanup.ts     # hive cleanup
-│   └── notify.ts      # hive notify
+│   ├── notify.ts      # hive notify
+│   ├── daemon.ts      # hive start/stop/ps
+│   ├── setup.ts       # hive setup telegram
+│   ├── update.ts      # hive update
+│   └── uninstall.ts   # hive uninstall
 ├── lib/
 │   ├── colors.ts      # ANSI color helpers
-│   └── workspace.ts   # Workspace resolution, status.json I/O, types
+│   ├── workspace.ts   # Workspace resolution, status.json I/O, types
+│   └── env.ts         # .env auto-loader
 └── __tests__/         # Excluded from tsc build
     ├── helpers.ts     # Shared test utilities (createTmpWorkspace, etc.)
     ├── lib/           # Unit tests for lib/

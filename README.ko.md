@@ -142,6 +142,25 @@ hive session all                  # 모든 프로젝트를 tmux 분할로 시작
 hive notify <메시지>              # Telegram 알림 전송
 ```
 
+### 세션 (백그라운드)
+
+```bash
+hive start [프로젝트] [-t] [-d]   # 백그라운드 tmux 세션으로 시작
+hive stop [프로젝트]               # 실행 중인 세션 종료
+hive ps                           # 실행 중인 세션 목록
+```
+
+옵션: `-t, --telegram` 텔레그램 채널 연동, `-d, --discord` 디스코드 채널 연동.
+프로젝트 없이 실행하면 워크스페이스 루트에서 시작.
+
+### 설정 & 관리
+
+```bash
+hive setup telegram               # 대화형 텔레그램 설정
+hive update                       # 최신 버전으로 업데이트
+hive uninstall                    # agents-hive CLI 삭제
+```
+
 ## 아키텍처
 
 ```
@@ -164,6 +183,14 @@ hive notify <메시지>              # Telegram 알림 전송
 │   ├── GEMINI.md              # Gemini 전용 설정
 │   ├── .claude/memory.md
 │   └── output/
+├── monitor/                   # 프로젝트: Codex CLI
+│   ├── CLAUDE.md
+│   ├── AGENTS.md
+│   ├── .codex/config.toml     # Codex 모델 설정
+│   ├── .claude/memory.md
+│   └── logs/
+├── .claude/
+│   └── settings.json          # 사전 승인된 권한
 └── .hive/
     └── crontab.generated      # 관리되는 크론 작업
 ```

@@ -47,7 +47,7 @@ git clone https://github.com/bokgun/agents-hive.git
 cd agents-hive && bun install && bun run build && bun link
 
 # Option 2: Quick install (requires bun + git)
-curl -fsSL https://raw.githubusercontent.com/user/agents-hive/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bokgun/agents-hive/main/install.sh | bash
 ```
 
 ### Uninstall
@@ -142,6 +142,25 @@ hive session all                  # Start all projects in tmux splits
 hive notify <message>             # Send Telegram notification
 ```
 
+### Sessions (background)
+
+```bash
+hive start [project] [-t] [-d]   # Start in background tmux session
+hive stop [project]               # Stop a running session
+hive ps                           # List running sessions
+```
+
+Options: `-t, --telegram` enables Telegram channel, `-d, --discord` enables Discord channel.
+Without a project, runs at workspace root.
+
+### Setup & Maintenance
+
+```bash
+hive setup telegram               # Interactive Telegram configuration
+hive update                       # Update to latest version
+hive uninstall                    # Remove agents-hive CLI
+```
+
 ## Architecture
 
 ```
@@ -164,6 +183,14 @@ hive notify <message>             # Send Telegram notification
 │   ├── GEMINI.md              # Gemini-specific config
 │   ├── .claude/memory.md
 │   └── output/
+├── monitor/                   # Project: Codex CLI
+│   ├── CLAUDE.md
+│   ├── AGENTS.md
+│   ├── .codex/config.toml     # Codex model config
+│   ├── .claude/memory.md
+│   └── logs/
+├── .claude/
+│   └── settings.json          # Pre-approved permissions
 └── .hive/
     └── crontab.generated      # Managed cron jobs
 ```

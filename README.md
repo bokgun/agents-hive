@@ -228,6 +228,20 @@ export HIVE_WORKSPACE=~/my-workspace
 
 **agents-hive** is best when coding quality matters most and you want a lightweight, file-based coordination layer. **OpenClaw** is better for always-on personal assistants with broad platform coverage.
 
+## Claude Code Integration
+
+다른 Claude Code 세션에서 agents-hive를 설치하려면 [`CLAUDE-INSTALL.md`](CLAUDE-INSTALL.md)를 읽게 하세요:
+
+```
+이 파일을 읽고 따라해: https://raw.githubusercontent.com/bokgun/agents-hive/main/CLAUDE-INSTALL.md
+```
+
+또는 한 줄로 설치:
+
+```bash
+git clone https://github.com/bokgun/agents-hive.git ~/.agents-hive && cd ~/.agents-hive && bun install && bun run build && bun link
+```
+
 ## Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.

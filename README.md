@@ -17,6 +17,8 @@ hive session backend --channels plugin:telegram@claude-plugins-official
 <!-- TODO: Replace with actual screenshot -->
 <!-- ![demo](assets/demo.gif) -->
 
+> [한국어](README.ko.md)
+
 ---
 
 ## Why?

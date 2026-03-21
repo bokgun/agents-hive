@@ -17,7 +17,11 @@ export interface StatusData {
 
 export function resolveWorkspace(): string | null {
   if (process.env.HIVE_WORKSPACE) {
-    return process.env.HIVE_WORKSPACE;
+    const envStatus = path.join(process.env.HIVE_WORKSPACE, 'shared-memory', 'status.json');
+    if (fs.existsSync(envStatus)) {
+      return process.env.HIVE_WORKSPACE;
+    }
+    return null;
   }
 
   const cwdStatus = path.join(process.cwd(), 'shared-memory', 'status.json');

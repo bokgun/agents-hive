@@ -1,0 +1,45 @@
+import { describe, expect, test } from 'bun:test';
+import { runHive } from './helpers.js';
+
+describe('CLI interface', () => {
+  test('--version returns version number', () => {
+    const { stdout, exitCode } = runHive(['--version']);
+    expect(exitCode).toBe(0);
+    expect(stdout.trim()).toBe('0.1.0');
+  });
+
+  test('-v returns version number', () => {
+    const { stdout, exitCode } = runHive(['-v']);
+    expect(exitCode).toBe(0);
+    expect(stdout.trim()).toBe('0.1.0');
+  });
+
+  test('--help shows usage info', () => {
+    const { stdout, exitCode } = runHive(['--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('Usage: hive');
+    expect(stdout).toContain('init');
+    expect(stdout).toContain('project');
+    expect(stdout).toContain('memo');
+    expect(stdout).toContain('cron');
+    expect(stdout).toContain('status');
+  });
+
+  test('project --help shows subcommands', () => {
+    const { stdout, exitCode } = runHive(['project', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('create');
+    expect(stdout).toContain('edit');
+    expect(stdout).toContain('delete');
+    expect(stdout).toContain('list');
+  });
+
+  test('cron --help shows subcommands', () => {
+    const { stdout, exitCode } = runHive(['cron', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('add');
+    expect(stdout).toContain('list');
+    expect(stdout).toContain('remove');
+    expect(stdout).toContain('apply');
+  });
+});

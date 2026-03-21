@@ -12,6 +12,7 @@ import { briefing } from './commands/briefing.js';
 import { cleanup } from './commands/cleanup.js';
 import { notify } from './commands/notify.js';
 import { uninstall } from './commands/uninstall.js';
+import { update } from './commands/update.js';
 import { N, Y } from './lib/colors.js';
 
 const VERSION = '0.1.0';
@@ -174,6 +175,14 @@ program
   .description('Send Telegram notification')
   .action((msgParts: string[]) => {
     notify(msgParts.join(' '));
+  });
+
+// --- update ---
+program
+  .command('update')
+  .description('Update agents-hive to the latest version')
+  .action(() => {
+    update();
   });
 
 // --- uninstall ---

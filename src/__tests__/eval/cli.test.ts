@@ -43,6 +43,12 @@ describe('CLI interface', () => {
     expect(stdout).toContain('apply');
   });
 
+  test('update --help shows description', () => {
+    const { stdout, exitCode } = runHive(['update', '--help']);
+    expect(exitCode).toBe(0);
+    expect(stdout).toContain('Update');
+  });
+
   test('uninstall --help shows description', () => {
     const { stdout, exitCode } = runHive(['uninstall', '--help']);
     expect(exitCode).toBe(0);

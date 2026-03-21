@@ -14,6 +14,9 @@ import { notify } from './commands/notify.js';
 import { uninstall } from './commands/uninstall.js';
 import { update } from './commands/update.js';
 import { N, Y } from './lib/colors.js';
+import { loadEnv } from './lib/env.js';
+
+loadEnv();
 
 const VERSION = '0.1.0';
 

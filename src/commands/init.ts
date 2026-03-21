@@ -81,14 +81,26 @@ __pycache__/
 `,
   );
 
-  // .claude/settings.json — pre-approve telegram plugin
+  // .claude/settings.json — pre-approve permissions for autonomous operation
   fs.mkdirSync(path.join(dir, '.claude'), { recursive: true });
   fs.writeFileSync(
     path.join(dir, '.claude', 'settings.json'),
     JSON.stringify(
       {
         permissions: {
-          allow: ['mcp__plugin_telegram_telegram__reply'],
+          allow: [
+            'mcp__plugin_telegram_telegram__reply',
+            'Read',
+            'Grep',
+            'Glob',
+            'Bash(git *)',
+            'Bash(jq *)',
+            'Bash(cat *)',
+            'Bash(npm *)',
+            'Bash(ls *)',
+            'Bash(head *)',
+            'Bash(tail *)',
+          ],
         },
       },
       null,

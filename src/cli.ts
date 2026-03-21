@@ -184,17 +184,17 @@ program
 
 // --- start ---
 program
-  .command('start <project> [extra...]')
-  .description('Start a project session in the background (tmux)')
-  .action((project: string, extra: string[]) => {
+  .command('start [project] [extra...]')
+  .description('Start a session in the background (tmux)')
+  .action((project: string | undefined, extra: string[]) => {
     start(project, extra);
   });
 
 // --- stop ---
 program
-  .command('stop <project>')
-  .description('Stop a running project session')
-  .action((project: string) => {
+  .command('stop [project]')
+  .description('Stop a running session')
+  .action((project: string | undefined) => {
     stop(project);
   });
 

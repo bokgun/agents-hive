@@ -13,16 +13,17 @@ function tmuxSessionExists(name: string): boolean {
   }
 }
 
-export function start(project: string, extra: string[]): void {
+export function start(project: string | undefined, extra: string[]): void {
   const ws = requireWorkspace();
-  const projectDir = path.join(ws, project);
 
-  if (!fs.existsSync(projectDir)) {
+  const label = project ?? 'root';
+  const cwd = project ? path.join(ws, project) : ws;
+  const sessionName = `hive-${label}`;
+
+  if (project && !fs.existsSync(cwd)) {
     console.error(error(`Not found: ${project}`));
     process.exit(1);
   }
-
-  const sessionName = `hive-${project}`;
 
   if (tmuxSessionExists(sessionName)) {
     console.error(warn(`Already running: ${sessionName}`));
@@ -31,7 +32,7 @@ export function start(project: string, extra: string[]): void {
   }
 
   const status = readStatus(ws);
-  const agent = status.projects[project]?.agent ?? 'claude';
+  const agent = project ? (status.projects[project]?.agent ?? 'claude') : 'claude';
 
   // Build the command to run inside tmux
   let cmd: string;
@@ -39,14 +40,10 @@ export function start(project: string, extra: string[]): void {
 
   switch (agent) {
     case 'gemini':
-      cmd = commandExists('gemini')
-        ? `gemini${extraArgs}`
-        : `claude${extraArgs}`;
+      cmd = commandExists('gemini') ? `gemini${extraArgs}` : `claude${extraArgs}`;
       break;
     case 'codex':
-      cmd = commandExists('codex')
-        ? `codex${extraArgs}`
-        : `claude${extraArgs}`;
+      cmd = commandExists('codex') ? `codex${extraArgs}` : `claude${extraArgs}`;
       break;
     default:
       cmd = `claude${extraArgs}`;
@@ -56,7 +53,7 @@ export function start(project: string, extra: string[]): void {
   try {
     execSync(`tmux new-session -d -s ${sessionName}`, { stdio: 'pipe' });
     execSync(
-      `tmux send-keys -t ${sessionName} "cd ${projectDir} && CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 ${cmd}" Enter`,
+      `tmux send-keys -t ${sessionName} "cd ${cwd} && CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 ${cmd}" Enter`,
       { stdio: 'pipe' },
     );
   } catch (e) {
@@ -65,19 +62,20 @@ export function start(project: string, extra: string[]): void {
   }
 
   // Update status
-  if (status.projects[project]) {
+  if (project && status.projects[project]) {
     status.projects[project].status = 'running';
     writeStatus(ws, status);
   }
 
-  console.log(success(`Started: ${cyan(project)} (${agent})`));
+  console.log(success(`Started: ${cyan(label)} (${agent})`));
   console.log(`    tmux session: ${cyan(sessionName)}`);
   console.log(`    Attach: ${cyan(`tmux attach -t ${sessionName}`)}`);
 }
 
-export function stop(project: string): void {
+export function stop(project: string | undefined): void {
   const ws = requireWorkspace();
-  const sessionName = `hive-${project}`;
+  const label = project ?? 'root';
+  const sessionName = `hive-${label}`;
 
   if (!tmuxSessionExists(sessionName)) {
     console.error(warn(`Not running: ${sessionName}`));
@@ -92,12 +90,12 @@ export function stop(project: string): void {
   }
 
   const status = readStatus(ws);
-  if (status.projects[project]) {
+  if (project && status.projects[project]) {
     status.projects[project].status = 'idle';
     writeStatus(ws, status);
   }
 
-  console.log(success(`Stopped: ${cyan(project)}`));
+  console.log(success(`Stopped: ${cyan(label)}`));
 }
 
 export function ps(): void {

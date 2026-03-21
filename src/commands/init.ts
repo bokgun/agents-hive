@@ -90,6 +90,9 @@ __pycache__/
         permissions: {
           allow: [
             'mcp__plugin_telegram_telegram__reply',
+            'mcp__plugin_telegram_telegram__react',
+            'mcp__plugin_telegram_telegram__download_attachment',
+            'mcp__plugin_telegram_telegram__edit_message',
             'Read',
             'Grep',
             'Glob',

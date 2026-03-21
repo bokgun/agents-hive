@@ -20,7 +20,7 @@ import { loadEnv } from './lib/env.js';
 
 loadEnv();
 
-const VERSION = '0.3.1';
+const VERSION = '0.4.0';
 
 const program = new Command();
 

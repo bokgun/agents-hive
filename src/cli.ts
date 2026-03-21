@@ -186,8 +186,13 @@ program
 program
   .command('start [project] [extra...]')
   .description('Start a session in the background (tmux)')
-  .action((project: string | undefined, extra: string[]) => {
-    start(project, extra);
+  .option('-t, --telegram', 'Enable Telegram channel')
+  .option('-d, --discord', 'Enable Discord channel')
+  .action((project: string | undefined, extra: string[], opts: { telegram?: boolean; discord?: boolean }) => {
+    const args = [...extra];
+    if (opts.telegram) args.push('--channels', 'plugin:telegram@claude-plugins-official');
+    if (opts.discord) args.push('--channels', 'plugin:discord@claude-plugins-official');
+    start(project, args);
   });
 
 // --- stop ---

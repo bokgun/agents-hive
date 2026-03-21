@@ -178,8 +178,8 @@ program
   .command('notify <message...>')
   .alias('n')
   .description('Send Telegram notification')
-  .action((msgParts: string[]) => {
-    notify(msgParts.join(' '));
+  .action(async (msgParts: string[]) => {
+    await notify(msgParts.join(' '));
   });
 
 // --- start ---

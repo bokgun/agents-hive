@@ -58,11 +58,36 @@ hive uninstall
 
 ### Prerequisites
 
-- **Node.js** 18+, [**bun**](https://bun.sh), **git**
+- **Node.js** 18+, [**bun**](https://bun.sh), **git**, **tmux**
 - At least one agent CLI:
   - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) — `npm i -g @anthropic-ai/claude-code`
   - [Codex CLI](https://github.com/openai/codex) — `npm i -g @openai/codex`
   - [Gemini CLI](https://github.com/google-gemini/gemini-cli) — `npm i -g @anthropic-ai/gemini-cli`
+
+#### tmux (required for `hive start` / `hive session all`)
+
+```bash
+# macOS
+brew install tmux
+
+# Ubuntu/Debian
+sudo apt install tmux
+```
+
+#### Telegram Plugin (optional, for `-t` flag)
+
+To use `hive start -t` or `--channels plugin:telegram`, set up the Claude Code Telegram plugin **on each machine**:
+
+```bash
+# 1. Enable the plugin
+claude plugins add telegram@claude-plugins-official
+
+# 2. Configure bot token and access (interactive)
+claude --channels plugin:telegram@claude-plugins-official
+# Then follow the pairing instructions in Telegram
+```
+
+> **Note:** The Telegram plugin config is stored in `~/.claude/channels/telegram/` and is machine-local — it won't sync across machines via git. You must run the setup on each computer.
 
 ## Quick Start
 

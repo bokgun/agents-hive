@@ -7,13 +7,23 @@ This file is designed for Claude Code to read and automatically install & config
 Verify required tools are installed:
 
 ```bash
-command -v git && command -v bun
+command -v git && command -v bun && command -v tmux
 ```
 
 If bun is missing, install it first:
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
+```
+
+If tmux is missing (required for `hive start` / `hive session all`):
+
+```bash
+# macOS
+brew install tmux
+
+# Ubuntu/Debian
+sudo apt install tmux
 ```
 
 ## 2. Install agents-hive
@@ -77,5 +87,16 @@ After installing, add the following to your workspace's `CLAUDE.md` to integrate
 - On status change, update `shared-memory/status.json`
 - When referencing other projects, check `shared-memory/`
 ```
+
+## Telegram Plugin (optional)
+
+To use `hive start -t` or `--channels plugin:telegram`, set up the Claude Code Telegram plugin on each machine:
+
+```bash
+claude plugins add telegram@claude-plugins-official
+claude --channels plugin:telegram@claude-plugins-official
+```
+
+The plugin config is stored in `~/.claude/channels/telegram/` (machine-local, not synced via git).
 
 Source: https://github.com/bokgun/agents-hive

@@ -58,11 +58,36 @@ hive uninstall
 
 ### 사전 요구사항
 
-- **Node.js** 18+, [**bun**](https://bun.sh), **git**
+- **Node.js** 18+, [**bun**](https://bun.sh), **git**, **tmux**
 - 에이전트 CLI 최소 하나:
   - [Claude Code](https://docs.anthropic.com/en/docs/claude-code/overview) — `npm i -g @anthropic-ai/claude-code`
   - [Codex CLI](https://github.com/openai/codex) — `npm i -g @openai/codex`
   - [Gemini CLI](https://github.com/google-gemini/gemini-cli) — `npm i -g @anthropic-ai/gemini-cli`
+
+#### tmux (`hive start` / `hive session all` 에 필요)
+
+```bash
+# macOS
+brew install tmux
+
+# Ubuntu/Debian
+sudo apt install tmux
+```
+
+#### Telegram 플러그인 (선택, `-t` 플래그 사용 시)
+
+`hive start -t` 또는 `--channels plugin:telegram`을 사용하려면 Claude Code 텔레그램 플러그인을 **각 머신마다** 설정해야 합니다:
+
+```bash
+# 1. 플러그인 활성화
+claude plugins add telegram@claude-plugins-official
+
+# 2. 봇 토큰 및 접근 설정 (대화형)
+claude --channels plugin:telegram@claude-plugins-official
+# 텔레그램에서 페어링 안내를 따르세요
+```
+
+> **참고:** 텔레그램 플러그인 설정은 `~/.claude/channels/telegram/`에 저장되며 머신 로컬입니다 — git으로 동기화되지 않으므로 각 컴퓨터에서 별도로 설정해야 합니다.
 
 ## 빠른 시작
 

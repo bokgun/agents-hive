@@ -7,13 +7,23 @@
 아래 명령어로 필수 도구가 설치되어 있는지 확인하세요:
 
 ```bash
-command -v git && command -v bun
+command -v git && command -v bun && command -v tmux
 ```
 
 bun이 없으면 먼저 설치:
 
 ```bash
 curl -fsSL https://bun.sh/install | bash
+```
+
+tmux가 없으면 설치 (`hive start` / `hive session all`에 필요):
+
+```bash
+# macOS
+brew install tmux
+
+# Ubuntu/Debian
+sudo apt install tmux
 ```
 
 ## 2. Install agents-hive
@@ -77,5 +87,16 @@ hive --version
 - 상태 변경 시 `shared-memory/status.json`을 업데이트하세요
 - 다른 프로젝트 참조 시 `shared-memory/`를 확인하세요
 ```
+
+## Telegram 플러그인 (선택)
+
+`hive start -t` 또는 `--channels plugin:telegram`을 사용하려면 각 머신에서 Claude Code 텔레그램 플러그인을 설정하세요:
+
+```bash
+claude plugins add telegram@claude-plugins-official
+claude --channels plugin:telegram@claude-plugins-official
+```
+
+플러그인 설정은 `~/.claude/channels/telegram/`에 저장되며 머신 로컬입니다 (git으로 동기화되지 않음).
 
 소스: https://github.com/bokgun/agents-hive

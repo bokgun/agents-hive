@@ -21,7 +21,7 @@ import { loadEnv } from './lib/env.js';
 
 loadEnv();
 
-const VERSION = '0.6.0';
+const VERSION = '0.6.1';
 
 const program = new Command();
 

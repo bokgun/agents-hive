@@ -170,13 +170,30 @@ hive notify <메시지>              # Telegram 알림 전송
 ### 세션 (백그라운드)
 
 ```bash
-hive start [프로젝트] [-t] [-d]   # 백그라운드 tmux 세션으로 시작
+hive start [프로젝트] [옵션]      # 백그라운드 tmux 세션으로 시작
 hive stop [프로젝트]               # 실행 중인 세션 종료
 hive ps                           # 실행 중인 세션 목록
 ```
 
-옵션: `-t, --telegram` 텔레그램 채널 연동, `-d, --discord` 디스코드 채널 연동.
+| 옵션 | 설명 |
+|------|------|
+| `-t, --telegram` | 텔레그램 채널 플러그인 활성화 |
+| `-d, --discord` | 디스코드 채널 플러그인 활성화 |
+| `-a, --auto` | Claude Code auto permission mode 활성화 |
+| `-b, --bot` | 텔레그램 봇 백그라운드 실행 |
+
 프로젝트 없이 실행하면 워크스페이스 루트에서 시작.
+
+### 텔레그램 봇
+
+```bash
+hive bot                          # 텔레그램 봇 시작 (포그라운드)
+hive start --bot                  # 텔레그램 봇 시작 (백그라운드 tmux)
+hive stop bot                     # 텔레그램 봇 종료
+```
+
+텔레그램에서 명령어 수신: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
+사전에 `hive setup telegram` 설정 필요.
 
 ### 설정 & 관리
 

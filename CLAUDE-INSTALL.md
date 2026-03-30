@@ -74,8 +74,15 @@ hive --version
 | `hive status` | Show all project status |
 | `hive run <project> <command>` | Run command via agent |
 | `hive session <project>` | Start interactive session |
+| `hive start [project] [-t] [-d] [-a] [-b]` | Start background tmux session |
+| `hive stop [project]` | Stop a running session |
+| `hive ps` | List running sessions |
+| `hive bot` | Start Telegram bot (foreground) |
 | `hive briefing` | Generate daily briefing |
+| `hive notify <message>` | Send Telegram notification |
 | `hive cron add <name> <schedule> <cmd>` | Add a cron job |
+| `hive setup telegram` | Interactive Telegram bot setup |
+| `hive update` | Update to latest version |
 
 ## For Claude Code
 
@@ -88,7 +95,7 @@ After installing, add the following to your workspace's `CLAUDE.md` to integrate
 - When referencing other projects, check `shared-memory/`
 ```
 
-## Telegram Plugin (optional)
+## Telegram Plugin (optional, for `-t` flag)
 
 To use `hive start -t` or `--channels plugin:telegram`, set up the Claude Code Telegram plugin on each machine:
 
@@ -98,5 +105,17 @@ claude --channels plugin:telegram@claude-plugins-official
 ```
 
 The plugin config is stored in `~/.claude/channels/telegram/` (machine-local, not synced via git).
+
+## Telegram Bot (optional, for `hive bot`)
+
+To receive hive commands from Telegram chat:
+
+```bash
+hive setup telegram               # Configure bot token & chat ID
+hive bot                          # Start bot (foreground)
+hive start --bot                  # Start bot (background tmux)
+```
+
+Supported commands: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
 
 Source: https://github.com/bokgun/agents-hive

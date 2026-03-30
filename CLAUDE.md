@@ -35,12 +35,14 @@ src/
 │   ├── briefing.ts    # hive briefing
 │   ├── cleanup.ts     # hive cleanup
 │   ├── notify.ts      # hive notify
+│   ├── bot.ts         # hive bot (Telegram bot with long polling)
 │   ├── daemon.ts      # hive start/stop/ps
 │   ├── setup.ts       # hive setup telegram
 │   ├── update.ts      # hive update
 │   └── uninstall.ts   # hive uninstall
 ├── lib/
 │   ├── colors.ts      # ANSI color helpers
+│   ├── telegram.ts    # Shared Telegram API helpers
 │   ├── workspace.ts   # Workspace resolution, status.json I/O, types
 │   └── env.ts         # .env auto-loader
 └── __tests__/         # Excluded from tsc build

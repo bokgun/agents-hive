@@ -170,13 +170,30 @@ hive notify <message>             # Send Telegram notification
 ### Sessions (background)
 
 ```bash
-hive start [project] [-t] [-d]   # Start in background tmux session
+hive start [project] [options]    # Start in background tmux session
 hive stop [project]               # Stop a running session
 hive ps                           # List running sessions
 ```
 
-Options: `-t, --telegram` enables Telegram channel, `-d, --discord` enables Discord channel.
+| Option | Description |
+|--------|-------------|
+| `-t, --telegram` | Enable Telegram channel plugin |
+| `-d, --discord` | Enable Discord channel plugin |
+| `-a, --auto` | Enable Claude Code auto permission mode |
+| `-b, --bot` | Start Telegram bot in background |
+
 Without a project, runs at workspace root.
+
+### Telegram Bot
+
+```bash
+hive bot                          # Start Telegram bot (foreground)
+hive start --bot                  # Start Telegram bot (background tmux)
+hive stop bot                     # Stop the Telegram bot
+```
+
+Receive commands from Telegram: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
+Requires `hive setup telegram` first.
 
 ### Setup & Maintenance
 

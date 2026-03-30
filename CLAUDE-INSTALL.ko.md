@@ -74,8 +74,15 @@ hive --version
 | `hive status` | 전체 상태 확인 |
 | `hive run <project> <command>` | 에이전트로 명령 실행 |
 | `hive session <project>` | 인터랙티브 세션 |
+| `hive start [project] [-t] [-d] [-a] [-b]` | 백그라운드 tmux 세션 시작 |
+| `hive stop [project]` | 실행 중인 세션 종료 |
+| `hive ps` | 실행 중인 세션 목록 |
+| `hive bot` | 텔레그램 봇 시작 (포그라운드) |
 | `hive briefing` | 일일 브리핑 생성 |
+| `hive notify <message>` | 텔레그램 알림 전송 |
 | `hive cron add <name> <schedule> <cmd>` | 크론 작업 추가 |
+| `hive setup telegram` | 대화형 텔레그램 봇 설정 |
+| `hive update` | 최신 버전으로 업데이트 |
 
 ## For Claude Code
 
@@ -88,7 +95,7 @@ hive --version
 - 다른 프로젝트 참조 시 `shared-memory/`를 확인하세요
 ```
 
-## Telegram 플러그인 (선택)
+## Telegram 플러그인 (선택, `-t` 플래그 사용 시)
 
 `hive start -t` 또는 `--channels plugin:telegram`을 사용하려면 각 머신에서 Claude Code 텔레그램 플러그인을 설정하세요:
 
@@ -98,5 +105,17 @@ claude --channels plugin:telegram@claude-plugins-official
 ```
 
 플러그인 설정은 `~/.claude/channels/telegram/`에 저장되며 머신 로컬입니다 (git으로 동기화되지 않음).
+
+## 텔레그램 봇 (선택, `hive bot` 사용 시)
+
+텔레그램 채팅에서 hive 명령어를 수신하려면:
+
+```bash
+hive setup telegram               # 봇 토큰 & 채팅 ID 설정
+hive bot                          # 봇 시작 (포그라운드)
+hive start --bot                  # 봇 시작 (백그라운드 tmux)
+```
+
+지원 명령어: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
 
 소스: https://github.com/bokgun/agents-hive

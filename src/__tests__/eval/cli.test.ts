@@ -5,13 +5,13 @@ describe('CLI interface', () => {
   test('--version returns version number', () => {
     const { stdout, exitCode } = runHive(['--version']);
     expect(exitCode).toBe(0);
-    expect(stdout.trim()).toBe('0.4.0');
+    expect(stdout.trim()).toBe('0.6.0');
   });
 
   test('-v returns version number', () => {
     const { stdout, exitCode } = runHive(['-v']);
     expect(exitCode).toBe(0);
-    expect(stdout.trim()).toBe('0.4.0');
+    expect(stdout.trim()).toBe('0.6.0');
   });
 
   test('--help shows usage info', () => {

@@ -21,7 +21,7 @@ import { loadEnv } from './lib/env.js';
 
 loadEnv();
 
-const VERSION = '0.5.0';
+const VERSION = '0.6.0';
 
 const program = new Command();
 
@@ -198,12 +198,14 @@ program
   .option('-t, --telegram', 'Enable Telegram channel')
   .option('-d, --discord', 'Enable Discord channel')
   .option('-b, --bot', 'Start Telegram bot in background')
-  .action((project: string | undefined, extra: string[], opts: { telegram?: boolean; discord?: boolean; bot?: boolean }) => {
+  .option('-a, --auto', 'Enable Claude Code auto permission mode')
+  .action((project: string | undefined, extra: string[], opts: { telegram?: boolean; discord?: boolean; bot?: boolean; auto?: boolean }) => {
     if (opts.bot) {
       startBotDaemon();
       return;
     }
     const args = [...extra];
+    if (opts.auto) args.push('--permission-mode', 'auto');
     if (opts.telegram) args.push('--channels', 'plugin:telegram@claude-plugins-official');
     if (opts.discord) args.push('--channels', 'plugin:discord@claude-plugins-official');
     start(project, args);

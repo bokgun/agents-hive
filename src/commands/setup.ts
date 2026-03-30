@@ -1,42 +1,12 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import https from 'node:https';
 import readline from 'node:readline';
 import { success, error, warn, cyan, dim } from '../lib/colors.js';
 import { requireWorkspace } from '../lib/workspace.js';
+import { httpsGet, sendMessage } from '../lib/telegram.js';
 
 function ask(rl: readline.Interface, question: string): Promise<string> {
   return new Promise((resolve) => rl.question(question, resolve));
-}
-
-function httpsGet(url: string): Promise<string> {
-  return new Promise((resolve, reject) => {
-    https
-      .get(url, (res) => {
-        let data = '';
-        res.on('data', (chunk) => (data += chunk));
-        res.on('end', () => resolve(data));
-      })
-      .on('error', reject);
-  });
-}
-
-function httpsSend(token: string, chatId: string, text: string): Promise<boolean> {
-  return new Promise((resolve) => {
-    const params = new URLSearchParams({ chat_id: chatId, text, parse_mode: 'Markdown' });
-    const req = https.request(
-      {
-        hostname: 'api.telegram.org',
-        path: `/bot${token}/sendMessage`,
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      },
-      (res) => resolve(res.statusCode === 200),
-    );
-    req.on('error', () => resolve(false));
-    req.write(params.toString());
-    req.end();
-  });
 }
 
 function saveToEnv(ws: string, key: string, value: string): void {
@@ -125,7 +95,7 @@ export async function setupTelegram(): Promise<void> {
   console.log('');
   console.log('Step 3: Sending test message...');
 
-  const sent = await httpsSend(token, chatId, '✅ agents-hive connected!');
+  const sent = await sendMessage(token, chatId, '✅ agents-hive connected!');
 
   if (sent) {
     console.log(success('Message sent! Check your Telegram.'));

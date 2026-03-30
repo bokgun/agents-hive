@@ -15,6 +15,7 @@ import { uninstall } from './commands/uninstall.js';
 import { update } from './commands/update.js';
 import { start, stop, ps } from './commands/daemon.js';
 import { setupTelegram } from './commands/setup.js';
+import { bot, startBotDaemon } from './commands/bot.js';
 import { N, Y } from './lib/colors.js';
 import { loadEnv } from './lib/env.js';
 
@@ -182,13 +183,26 @@ program
     await notify(msgParts.join(' '));
   });
 
+// --- bot ---
+program
+  .command('bot')
+  .description('Start Telegram bot (receives commands via Telegram)')
+  .action(async () => {
+    await bot();
+  });
+
 // --- start ---
 program
   .command('start [project] [extra...]')
   .description('Start a session in the background (tmux)')
   .option('-t, --telegram', 'Enable Telegram channel')
   .option('-d, --discord', 'Enable Discord channel')
-  .action((project: string | undefined, extra: string[], opts: { telegram?: boolean; discord?: boolean }) => {
+  .option('-b, --bot', 'Start Telegram bot in background')
+  .action((project: string | undefined, extra: string[], opts: { telegram?: boolean; discord?: boolean; bot?: boolean }) => {
+    if (opts.bot) {
+      startBotDaemon();
+      return;
+    }
     const args = [...extra];
     if (opts.telegram) args.push('--channels', 'plugin:telegram@claude-plugins-official');
     if (opts.discord) args.push('--channels', 'plugin:discord@claude-plugins-official');

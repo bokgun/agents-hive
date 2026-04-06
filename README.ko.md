@@ -192,7 +192,7 @@ hive start --bot                  # 텔레그램 봇 시작 (백그라운드 tmu
 hive stop bot                     # 텔레그램 봇 종료
 ```
 
-텔레그램에서 명령어 수신: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
+텔레그램에서 명령어 수신: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`, `/compact`, `/clear`.
 사전에 `hive setup telegram` 설정 필요.
 
 ### 설정 & 관리

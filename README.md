@@ -192,7 +192,7 @@ hive start --bot                  # Start Telegram bot (background tmux)
 hive stop bot                     # Stop the Telegram bot
 ```
 
-Receive commands from Telegram: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`.
+Receive commands from Telegram: `/status`, `/ps`, `/projects`, `/briefing`, `/memo`, `/start`, `/stop`, `/run`, `/compact`, `/clear`.
 Requires `hive setup telegram` first.
 
 ### Setup & Maintenance

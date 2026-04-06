@@ -1,5 +1,5 @@
 import { describe, expect, test, beforeEach, afterEach, spyOn } from 'bun:test';
-import { captureOutput } from '../../commands/bot.js';
+import { captureOutput, sendSlashCommand } from '../../commands/bot.js';
 import { stripAnsi } from '../../lib/telegram.js';
 import { status } from '../../commands/status.js';
 import { createTmpWorkspace, cleanupTmp, withWorkspace } from '../helpers.js';
@@ -74,6 +74,18 @@ describe('captureOutput', () => {
       console.log('captured');
     });
     expect(console.log).toBe(origLog);
+  });
+});
+
+describe('sendSlashCommand', () => {
+  test('returns "Not running" error when tmux session does not exist', () => {
+    const result = sendSlashCommand('definitely-not-a-real-project-xyz123', '/compact');
+    expect(result).toBe('Not running: hive-definitely-not-a-real-project-xyz123');
+  });
+
+  test('reports the slash command in the error message', () => {
+    const result = sendSlashCommand('nonexistent-project-abc789', '/clear');
+    expect(result).toContain('hive-nonexistent-project-abc789');
   });
 });
 

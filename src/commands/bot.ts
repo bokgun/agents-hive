@@ -25,6 +25,22 @@ function tmuxSessionExists(name: string): boolean {
   }
 }
 
+/** Inject a slash command (e.g. /compact, /clear) into a running hive tmux session */
+export function sendSlashCommand(project: string, slash: string): string {
+  const sessionName = `hive-${project}`;
+  if (!tmuxSessionExists(sessionName)) {
+    return `Not running: ${sessionName}`;
+  }
+  try {
+    execSync(`tmux send-keys -t ${sessionName} ${JSON.stringify(slash)} Enter`, {
+      stdio: 'pipe',
+    });
+    return `Sent ${slash} to ${sessionName}`;
+  } catch (e) {
+    return `Failed to send ${slash} to ${sessionName}: ${e}`;
+  }
+}
+
 /** Capture console output from a sync/async function without killing the process */
 export async function captureOutput(fn: () => void | Promise<void>): Promise<string> {
   const lines: string[] = [];
@@ -71,6 +87,8 @@ function formatHelp(): string {
     '/start <project> — Start background session',
     '/stop <project> — Stop background session',
     '/run <project> <command> — Run agent command',
+    '/compact <project> — Compact context in running session',
+    '/clear <project> — Clear context in running session',
   ].join('\n');
 }
 
@@ -131,6 +149,24 @@ async function handleCommand(token: string, chatId: string, text: string): Promi
         break;
       }
       response = await captureOutput(() => stop(args[0]));
+      break;
+    }
+
+    case '/compact': {
+      if (!args[0]) {
+        response = 'Usage: /compact <project>';
+        break;
+      }
+      response = sendSlashCommand(args[0], '/compact');
+      break;
+    }
+
+    case '/clear': {
+      if (!args[0]) {
+        response = 'Usage: /clear <project>';
+        break;
+      }
+      response = sendSlashCommand(args[0], '/clear');
       break;
     }
 
